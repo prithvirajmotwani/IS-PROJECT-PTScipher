@@ -6,26 +6,49 @@
 int main() {
     PTSCipher cipher;
     Key key;
-
     key.generateRandomKey();
-    std::array<uint32_t, 8> keyArray = key.getKey();
+
+    std::array<uint16_t, Key::subkeys> keyArray = key.getKey();
     for (uint8_t i = 0; i < 8; i++) {
         std::cout << keyArray[i] << ", ";
     }
     std::cout << '\n';
 
+    Key keyInverse = key.getKeyInverse();
+    std::array<uint16_t, Key::subkeys> keyInverseArray = keyInverse.getKey();
+    for (uint8_t i = 0; i < 8; i++) {
+        std::cout << keyInverseArray[i] << ", ";
+    }
+    std::cout << '\n';
+
     
+    std::cout << "Done\n";
+
+    
+    std::string text = "A quick brown fox";
+
+    std::cout << text << '\n';
+    std::cout << text.length() << '\n';
     std::string text = "A quick brown x";
     std::cout << text.length() << '\n';
     
-    cipher.pad(text,key);
-    std::cout << "after padding" << '\n';
+    cipher.pad(text);
+
+    std::cout << "\nAfter padding: \n";
+    std::cout << text << '\n';
     std::cout << text.length() << '\n';
 
-    cipher.permute(text,key);
+    cipher.substitute(text, key);
 
+    std::cout << "\nAfter substitution: \n";
     std::cout << text << '\n';
+    std::cout << text.length() << '\n';
 
+    cipher.inverseSubstitute(text, key);
+
+    std::cout << "\nAfter inverse substitution: \n";
+    std::cout << text << '\n';
+    std::cout << text.length() << '\n';
     cipher.inverser_permute(text,key);
     std::cout<< text << '\n';
 
