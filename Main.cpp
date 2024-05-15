@@ -16,12 +16,27 @@ int main() {
 
     
     std::string text = "A quick brown fox";
+
     std::cout << text << '\n';
+    std::cout << text.length() << '\n';
     
     cipher.pad(text);
 
+    std::cout << "After padding: \n";
     std::cout << text << '\n';
+    std::cout << text.length() << '\n';
 
+    cipher.substitute(text, key);
+
+    std::cout << "After substitution: \n";
+    std::cout << text << '\n';
+    std::cout << text.length() << '\n';
+
+    cipher.inverseSubstitute(text, key);
+
+    std::cout << "After inverse substitution: \n";
+    std::cout << text << '\n';
+    std::cout << text.length() << '\n';
 
 
     

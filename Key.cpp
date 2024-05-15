@@ -5,12 +5,14 @@
 #include <stdint.h>
 
 
+
 uint32_t randomUInt(uint32_t lowerLimit, uint32_t upperLimit)
 {
     std::random_device rd;
     std::uniform_int_distribution<uint32_t> dist(lowerLimit, upperLimit);
     return dist(rd);
 }
+
 
 
 void Key::generateRandomKey() 
@@ -38,7 +40,14 @@ std::array<uint32_t, 8> Key::getKey()
 }
 
 
+uint32_t Key::operator[](uint8_t index)
+{
+    return this->key.at(index);
+}
+
+
 void Key::operator++(int)
 {
 
 }
+
