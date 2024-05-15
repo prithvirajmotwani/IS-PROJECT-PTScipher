@@ -29,6 +29,8 @@ int main() {
 
     std::cout << text << '\n';
     std::cout << text.length() << '\n';
+    std::string text = "A quick brown x";
+    std::cout << text.length() << '\n';
     
     cipher.pad(text);
 
@@ -47,6 +49,9 @@ int main() {
     std::cout << "\nAfter inverse substitution: \n";
     std::cout << text << '\n';
     std::cout << text.length() << '\n';
+    cipher.inverser_permute(text,key);
+    std::cout<< text << '\n';
+
 
 
     
