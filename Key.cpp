@@ -23,7 +23,7 @@ void Key::generateRandomKey()
 }
 
 
-void Key::setKey(const std::array<uint32_t, 8>& key) 
+void Key::setKey(const std::array<uint32_t, Key::subkeys>& key) 
 {
     for (uint8_t i = 0; i < this->key.size(); i++) {
         if (key[i] == 0) {
@@ -34,13 +34,38 @@ void Key::setKey(const std::array<uint32_t, 8>& key)
 }
 
 
-std::array<uint32_t, 8> Key::getKey() 
+std::array<uint32_t, Key::subkeys> Key::getKey() 
 {
     return this->key;
 }
 
 
-uint32_t Key::operator[](uint8_t index)
+Key Key::getKeyInverse()
+{
+    Key keyInverse;
+    bool foundInverse[Key::subkeys];
+    double subkeyInverse;
+
+    for (uint8_t i = 0; i < Key::subkeys; i++) {
+        foundInverse[i] = false;
+    }
+
+    for (uint32_t n = 0; n <= UINT16_MAX; n++) {
+        for (uint8_t i = 0; i < Key::subkeys; i++) {
+            if (!foundInverse[i]) {
+                if (((n * this->key[i]) % (UINT16_MAX + 1)) == 1) {
+                    keyInverse[i] = n;
+                    foundInverse[i] = true;
+                }
+            }
+        }
+    }
+
+    return keyInverse;
+}
+
+
+uint32_t& Key::operator[](uint8_t index)
 {
     return this->key.at(index);
 }
