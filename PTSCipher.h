@@ -12,5 +12,7 @@ public:
     void substitute(std::string& text, Key key);
     void permute(std::string& text, Key key);
 
+    void inverseSubstitute(std::string& text, Key key);
+
 
 };
