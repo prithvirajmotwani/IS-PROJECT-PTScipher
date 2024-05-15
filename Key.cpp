@@ -32,12 +32,17 @@ void Key::setKey(const std::array<uint32_t, 8>& key)
 }
 
 
+
+
 std::array<uint32_t, 8> Key::getKey() 
 {
     return this->key;
 }
 
-
+uint32_t Key::operator[](uint8_t index) 
+{
+    return this->key.at(index);
+}
 void Key::operator++(int)
 {
 

@@ -15,12 +15,19 @@ int main() {
     std::cout << '\n';
 
     
-    std::string text = "A quick brown fox";
-    std::cout << text << '\n';
+    std::string text = "A quick brown x";
+    std::cout << text.length() << '\n';
     
-    cipher.pad(text);
+    cipher.pad(text,key);
+    std::cout << "after padding" << '\n';
+    std::cout << text.length() << '\n';
+
+    cipher.permute(text,key);
 
     std::cout << text << '\n';
+
+    cipher.inverser_permute(text,key);
+    std::cout<< text << '\n';
 
 
 
